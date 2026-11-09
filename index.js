@@ -35,17 +35,21 @@ app.get('/vidinad/:id', (req, res) => {
     res.send(vidinad[req.params.id-1])
 })
 
-app.post('/vidinad/:id', (req, res) => {
+app.post('/vidinad', (req, res) => {
     if (! req.body.name || !req.body.price) {
         return res.status(400).send({error: "midagi puudub, kontrolli andmeid"})
     }
     let newVidin = {
-        id: visinad.length +1,
+        id: vidinad.length +1,
         price: req.body.price,
         name: req.body.name
 
     }
     vidinad.push(newVidin)
-    return res.send(201).location('localhost:8080/vidinad' +{vidinad.length
-        -1}).send(newVidin)
+    return res.send(201).location('localhost:8080/vidinad' +(vidinad.length
+        -1)).send(newVidin)
+})
+
+app.listen(8080, () => {
+    console.log(`API töötab aadressil: http://localhost:8080`)
 })
