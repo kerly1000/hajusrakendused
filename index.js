@@ -1,0 +1,51 @@
+const express = require('express')
+const cors = require('cors')
+const app = express()
+
+app.use(cors())
+app.use(express.json()) //!exp error, body not defined by default
+
+const vidinad = [
+    {
+        id : 1,
+        name : "laadija",
+        price : 19.99
+    },
+    {
+        id : 2,
+        name : "kaaned",
+        price : 14.99
+    },
+    {
+        id : 3,
+        name : "kõnepakett",
+        price : 9.99
+    }
+
+]
+
+app.get('/vidinad', (req, res) => {
+    res.send(vidinad)
+})
+
+app.get('/vidinad/:id', (req, res) => {
+    if (typeof vidinad[req.params.id-1] === undefined) {
+        return res.status(404).send({error: "vidinat pole"})
+    }
+    res.send(vidinad[req.params.id-1])
+})
+
+app.post('/vidinad/:id', (req, res) => {
+    if (! req.body.name || !req.body.price) {
+        return res.status(400).send({error: "midagi puudub, kontrolli andmeid"})
+    }
+    let newVidin = {
+        id: visinad.length +1,
+        price: req.body.price,
+        name: req.body.name
+
+    }
+    vidinad.push(newVidin)
+    return res.send(201).location('localhost:8080/vidinad' +{vidinad.length
+        -1}).send(newVidin)
+})
