@@ -50,6 +50,32 @@ app.post('/vidinad', (req, res) => {
         -1)).send(newVidin)
 })
 
+app.put('/vidinad/:id', (req, res) =>{
+    if (typeof vidinad[req.params.id-1] === 'undefined') {
+        return res.status(404).send({error:`vidinat id-ga ${req.params.id} ei ole`})
+    }
+    if (!req.body.name || !req.body.price) {
+        return res.statud(400-send({error:"andmed puuduvad"}))
+    }
+    let muudetudVidin = {
+        id: req.params.id-1,
+        name: req.body.name,
+        price: req.body.price
+    }
+    vidinad[req.params.id-1].name = muudetudVidin.name
+    vidinad[req.params.id-1].price = muudetudVidin.price
+    return res.status(201).location('localhost:8080/vidinad/'+(muudetudVidin.id)).send(muudetudVidin)
+}) 
+
+app.delete('/vidinad/:id', (req, res) =>{
+    if (typeof vidinad[req.params.id-1] === 'undefined') {
+        return res.status(404).send({error: "vidinat pole"})
+    }
+    vidinad.splice(req.params.id-1,1)
+    res.status(204).send({error:"no content"})
+})
+
 app.listen(8080, () => {
     console.log(`API töötab aadressil: http://localhost:8080`)
 })
+
