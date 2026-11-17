@@ -14,7 +14,7 @@ jobs:
           subject: "ALERT, we have detected hot single commits in your area ${{github.repository}}" 
           body:
             Hello team, a commit has been detected. Please rewiew changes and merge into main branch.
-            Commit: ${{github.event.pusher.name}}
-            Changes: 
+            Commit ${{github.event.pusher.name}}
+            Changes 
           to: "kerly1000@hotmail.com"
           from: "Github actions for ${{github.repository}}"  
