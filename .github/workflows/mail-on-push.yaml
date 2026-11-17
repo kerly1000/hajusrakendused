@@ -16,5 +16,5 @@ jobs:
             Hello team, a commit has been detected. Please rewiew changes and merge into main branch.
             Commit ${{github.event.pusher.name}}
             Changes 
-          to: "kerly1000@hotmail.com"
+          to: "jyri.vaitmaa@techno.ee"
           from: "Github actions for ${{github.repository}}"  
